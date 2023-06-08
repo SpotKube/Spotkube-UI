@@ -54,7 +54,7 @@ const AppHeader = () => {
           
         </CHeaderNav>
         <CHeaderNav className="ms-3">
-          <AppHeaderDropdown />
+          {/* <AppHeaderDropdown /> */}
         </CHeaderNav>
       </CContainer>
       <CHeaderDivider />
