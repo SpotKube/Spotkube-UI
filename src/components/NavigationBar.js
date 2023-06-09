@@ -37,7 +37,7 @@ const NavigationBar = (props) => {
                       />
                     </Link>
                     <h2 className="mx-4 text-center text-xl sm:text-3xl font-extrabold text-gray-900">
-                     Stated Choice Survey Creator
+                      SpotKube
                     </h2>
                     <div className="-mr-2 flex items-center md:hidden">
                       <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">

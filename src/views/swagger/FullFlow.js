@@ -24,7 +24,7 @@ import FullFlowWidget from "./FullFlowWidget";
 import api from "../../api";
 import { toast } from "react-toastify";
 
-const Dashboard = () => {
+const FullFlow = () => {
   const [instanceValues, setInstanceValues] = useState({
     spotInstances: 4,
     privateInstances: 2,
@@ -39,7 +39,7 @@ const Dashboard = () => {
   // Startup AWS Cloud
   const startupAWS = async () => {
     setLoading(true);
-    const res = await api.fullFlow.home();
+    const res = await api.fullFlow.startUpAwsCloud();
     console.log(res);
     if (res.status === 200) {
       toast.success(res.message);
@@ -53,7 +53,7 @@ const Dashboard = () => {
   // Startup Private Cloud
   const startupPrivate = async () => {
     setLoading(true);
-    const res = await api.fullFlow.home();
+    const res = await api.fullFlow.startUpPrivateCloud();
     console.log(res);
     if (res.status === 200) {
       toast.success(res.message);
@@ -67,7 +67,7 @@ const Dashboard = () => {
   // Destroy AWS Cloud
   const destroyAWS = async () => {
     setLoading(true);
-    const res = await api.fullFlow.home();
+    const res = await api.nodeAllocator.destroyAWS();
     console.log(res);
     if (res.status === 200) {
       toast.success(res.message);
@@ -81,7 +81,7 @@ const Dashboard = () => {
   // Destroy Private Cloud
   const destroyPrivate = async () => {
     setLoading(true);
-    const res = await api.fullFlow.home();
+    const res = await api.nodeAllocator.destroyPrivate();
     console.log(res);
     if (res.status === 200) {
       toast.success(res.message);
@@ -111,7 +111,7 @@ const Dashboard = () => {
           visible={privateModalVisibility}
           message={"Are you sure you want to destroy the Private Cloud?"}
           onSubmit={async () => {
-            await destroyAWS();
+            await destroyPrivate();
             setPrivateModalVisibility(false);
           }}
           onClose={() => setPrivateModalVisibility(false)}
@@ -223,4 +223,4 @@ const Dashboard = () => {
     </>
   );
 };
-export default Dashboard;
+export default FullFlow;

@@ -8,43 +8,50 @@ import {
   cilMediaPause,
   cilWc,
   cilSettings,
+  cilSend,
 } from "@coreui/icons";
 import { CNavGroup, CNavItem, CNavTitle } from "@coreui/react";
 
 const _nav = [
-  // {
-  //   component: CNavTitle,
-  //   name: "API",
-  //
-  // },
   {
-    component: CNavGroup,
-    name: "APIs",
-    to: "/",
-    icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
-    items: [
-      {
-        component: CNavItem,
-        name: "Full flow",
-        to: "/swagger/full-flow",
-      },
-      {
-        component: CNavItem,
-        name: "Optimization Engine",
-        to: "/swagger/optimization-engine",
-      },
-      {
-        component: CNavItem,
-        name: "Node Allocator",
-        to: "/swagger/node-allocator",
-      },
-      {
-        component: CNavItem,
-        name: "Helm service",
-        to: "/swagger/helm-service",
-      },
-    ],
+    component: CNavTitle,
+    name: "API",
   },
+  {
+    component: CNavItem,
+    name: "Complete APIs",
+    to: "/swagger/full-flow",
+    icon: <CIcon icon={cilSend} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavItem,
+    name: "Partial APIs",
+    to: "/swagger/partial-apis",
+    icon: <CIcon icon={cilSend} customClassName="nav-icon" />,
+  },
+  // {
+  //   component: CNavGroup,
+  //   name: "APIs",
+  //   to: "/",
+  //   icon: <CIcon icon={cilSend} customClassName="nav-icon" />,
+  //   items: [
+  //     {
+  //       component: CNavItem,
+  //       name: "Complete APIs",
+  //       to: "/swagger/full-flow",
+  //     },
+  //     {
+  //       component: CNavItem,
+  //       name: "Partial APIs",
+  //       to: "/swagger/partial-apis",
+  //     },
+  //   ],
+  // },
+  //  {
+  //   component: CNavTitle,
+  //   name: "Monitoring",
+
+  // },
 ];
 
 export default _nav;

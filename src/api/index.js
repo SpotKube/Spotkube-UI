@@ -101,10 +101,10 @@ export default {
     async updateAwsCloud() {
       return ajaxResolver(axios.post(`/update_aws_cloud`, {}));
     },
-    async startUpAwsCloud() {
+    async startUpPrivateCloud() {
       return ajaxResolver(axios.post(`/startup_private_cloud`, {}));
     },
-    async updateAwsCloud() {
+    async updatePrivateCloud() {
       return ajaxResolver(axios.post(`/update_private_cloud`, {}));
     },
   },
