@@ -23,7 +23,7 @@ const AppHeaderDropdown = () => {
 
   const submitLogOut = async () => {
     await dispatch(thunks.user.userLogout());
-    history.replace("/login");
+    history.replace("/swagger");
     history.go(0);
   };
 

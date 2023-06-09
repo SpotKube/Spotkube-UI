@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import {
   CContainer,
@@ -11,159 +11,116 @@ import {
   CButton,
   CBadge,
   CWidgetStatsD,
+  CSpinner,
 } from "@coreui/react";
 
 import CIcon from "@coreui/icons-react";
 import { cibAmazonAws, cibServerFault } from "@coreui/icons";
 import { CChartLine } from "@coreui/react-chartjs";
 
+import { CustomModal } from "../../components";
+
+import FullFlowWidget from "./FullFlowWidget";
+import api from "../../api";
+import { toast } from "react-toastify";
+
 const Dashboard = () => {
+  const [instanceValues, setInstanceValues] = useState({
+    spotInstances: 4,
+    privateInstances: 2,
+  });
+
+  const [loading, setLoading] = useState(false);
+
+  // Modal related states
+  const [awsModalVisibility, setAwsModalVisibility] = useState(false);
+  const [privateModalVisibility, setPrivateModalVisibility] = useState(false);
+
+  // Startup AWS Cloud
+  const startupAWS = async () => {
+    setLoading(true);
+    const res = await api.fullFlow.home();
+    console.log(res);
+    if (res.status === 200) {
+      toast.success(res.message);
+      setLoading(false);
+    } else {
+      toast.error(res.error_message || res.message || "Something went wrong");
+      setLoading(false);
+    }
+  };
+
+  // Startup Private Cloud
+  const startupPrivate = async () => {
+    setLoading(true);
+    const res = await api.fullFlow.home();
+    console.log(res);
+    if (res.status === 200) {
+      toast.success(res.message);
+      setLoading(false);
+    } else {
+      toast.error(res.error_message || res.message || "Something went wrong");
+      setLoading(false);
+    }
+  };
+
+  // Destroy AWS Cloud
+  const destroyAWS = async () => {
+    setLoading(true);
+    const res = await api.fullFlow.home();
+    console.log(res);
+    if (res.status === 200) {
+      toast.success(res.message);
+      setLoading(false);
+    } else {
+      toast.error(res.error_message || res.message || "Something went wrong");
+      setLoading(false);
+    }
+  };
+
+  // Destroy Private Cloud
+  const destroyPrivate = async () => {
+    setLoading(true);
+    const res = await api.fullFlow.home();
+    console.log(res);
+    if (res.status === 200) {
+      toast.success(res.message);
+      setLoading(false);
+    } else {
+      toast.error(res.error_message || res.message || "Something went wrong");
+      setLoading(false);
+    }
+  };
+
   return (
     <>
       <CContainer className="ph-8 pb-16 h-full">
-        <CRow>
-          <CCol xs={6}>
-            <CWidgetStatsD
-              className="mb-3"
-              icon={
-                <CIcon
-                  className="my-4 text-white"
-                  icon={cibAmazonAws}
-                  height={52}
-                />
-              }
-              chart={
-                <CChartLine
-                  className="position-absolute w-100 h-100"
-                  data={{
-                    labels: [
-                      "January",
-                      "February",
-                      "March",
-                      "April",
-                      "May",
-                      "June",
-                      "July",
-                    ],
-                    datasets: [
-                      {
-                        backgroundColor: "rgba(255,255,255,.1)",
-                        borderColor: "rgba(255,255,255,.55)",
-                        pointHoverBackgroundColor: "#fff",
-                        borderWidth: 2,
-                        data: [65, 59, 84, 84, 51, 55, 40],
-                        fill: true,
-                      },
-                    ],
-                  }}
-                  options={{
-                    elements: {
-                      line: {
-                        tension: 0.4,
-                      },
-                      point: {
-                        radius: 0,
-                        hitRadius: 10,
-                        hoverRadius: 4,
-                        hoverBorderWidth: 3,
-                      },
-                    },
-                    maintainAspectRatio: false,
-                    plugins: {
-                      legend: {
-                        display: false,
-                      },
-                    },
-                    scales: {
-                      x: {
-                        display: false,
-                      },
-                      y: {
-                        display: false,
-                      },
-                    },
-                  }}
-                />
-              }
-              style={{ "--cui-card-cap-bg": "#FF9900" }}
-              values={[
-                { title: "Spot Instances", value: "4" },
-                // { title: "feeds", value: "459" },
-              ]}
-            />
-          </CCol>
-          <CCol xs={6}>
-            <CWidgetStatsD
-              className="mb-3"
-              icon={
-                <CIcon
-                  className="my-4 text-white"
-                  icon={cibServerFault}
-                  height={52}
-                />
-              }
-              chart={
-                <CChartLine
-                  className="position-absolute w-100 h-100"
-                  data={{
-                    labels: [
-                      "January",
-                      "February",
-                      "March",
-                      "April",
-                      "May",
-                      "June",
-                      "July",
-                    ],
-                    datasets: [
-                      {
-                        backgroundColor: "rgba(255,255,255,.1)",
-                        borderColor: "rgba(255,255,255,.55)",
-                        pointHoverBackgroundColor: "#fff",
-                        borderWidth: 2,
-                        data: [1, 13, 9, 17, 34, 41, 38],
-                        fill: true,
-                      },
-                    ],
-                  }}
-                  options={{
-                    elements: {
-                      line: {
-                        tension: 0.4,
-                      },
-                      point: {
-                        radius: 0,
-                        hitRadius: 10,
-                        hoverRadius: 4,
-                        hoverBorderWidth: 3,
-                      },
-                    },
-                    maintainAspectRatio: false,
-                    plugins: {
-                      legend: {
-                        display: false,
-                      },
-                    },
-                    scales: {
-                      x: {
-                        display: false,
-                      },
-                      y: {
-                        display: false,
-                      },
-                    },
-                  }}
-                />
-              }
-              style={{ "--cui-card-cap-bg": "#f80000" }}
-              values={[
-                { title: "Private Instances", value: "2" },
-                // { title: "tweets", value: "1.792" },
-              ]}
-            />
-          </CCol>
-        </CRow>
-        <CRow>
+        <CustomModal
+          visible={awsModalVisibility}
+          message={"Are you sure you want to destroy the AWS Cloud?"}
+          onSubmit={async () => {
+            await destroyAWS();
+            setAwsModalVisibility(false);
+          }}
+          onClose={() => setAwsModalVisibility(false)}
+          title={"Destroy AWS Cloud"}
+          submitLabel={"Destroy"}
+          loading={loading}
+        />
+        <CustomModal
+          visible={privateModalVisibility}
+          message={"Are you sure you want to destroy the Private Cloud?"}
+          onSubmit={async () => {
+            await destroyAWS();
+            setPrivateModalVisibility(false);
+          }}
+          onClose={() => setPrivateModalVisibility(false)}
+          title={"Destroy Private Cloud"}
+          submitLabel={"Destroy"}
+          loading={loading}
+        />
+        <FullFlowWidget instanceValues={instanceValues} />
+        <CRow className="pt-16">
           <CCol sm={6}>
             <CCard>
               <CCardBody>
@@ -171,10 +128,18 @@ const Dashboard = () => {
                   Startup <CBadge color="warning">AWS</CBadge> Cloud
                 </CCardTitle>
                 <CCardText>
-                  Start up the AWS Cloud and create the necessary resources,
+                  Start up the AWS Cloud and create the necessary resources, and
                   deploy microservices.
                 </CCardText>
-                <CButton color="success" variant="outline">
+                <CButton
+                  color="success"
+                  variant="outline"
+                  onClick={startupAWS}
+                  disabled={loading}
+                >
+                  {loading && (
+                    <CSpinner component="span" size="sm" aria-hidden="true" />
+                  )}{" "}
                   Start
                 </CButton>
               </CCardBody>
@@ -188,10 +153,67 @@ const Dashboard = () => {
                 </CCardTitle>
                 <CCardText>
                   Start up the private Cloud and create the necessary resources,
-                  deploy microservices.
+                  and deploy microservices.
                 </CCardText>
-                <CButton color="success" variant="outline">
+                <CButton
+                  color="success"
+                  variant="outline"
+                  onClick={startupAWS}
+                  disabled={loading}
+                >
+                  {loading && (
+                    <CSpinner component="span" size="sm" aria-hidden="true" />
+                  )}{" "}
                   Start
+                </CButton>
+              </CCardBody>
+            </CCard>
+          </CCol>
+        </CRow>
+        {/* ----------------------------- Destroy ------------------------------------- */}
+        <CRow className="pt-16">
+          <CCol sm={6}>
+            <CCard>
+              <CCardBody>
+                <CCardTitle>
+                  Destroy <CBadge color="warning">AWS</CBadge> Cloud
+                </CCardTitle>
+                <CCardText>
+                  Destroy the AWS Cloud with all the resources.
+                </CCardText>
+                <CButton
+                  color="danger"
+                  variant="outline"
+                  onClick={() => setAwsModalVisibility(true)}
+                  disabled={loading}
+                >
+                  {loading && (
+                    <CSpinner component="span" size="sm" aria-hidden="true" />
+                  )}{" "}
+                  Destroy
+                </CButton>
+              </CCardBody>
+            </CCard>
+          </CCol>
+          <CCol sm={6}>
+            <CCard>
+              <CCardBody>
+                <CCardTitle>
+                  Destroy <CBadge color="danger">Private</CBadge> Cloud
+                </CCardTitle>
+                <CCardText>
+                  Destroy the private Cloud with all the resources
+                </CCardText>
+                <CButton
+                  color="danger"
+                  variant="outline"
+                  onClick={() => setPrivateModalVisibility(true)}
+                  disabled={loading}
+                >
+                  {loading && (
+                    <CSpinner component="span" size="sm" aria-hidden="true" />
+                  )}{" "}
+                  Destroy
                 </CButton>
               </CCardBody>
             </CCard>

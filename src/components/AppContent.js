@@ -30,7 +30,7 @@ const AppContent = () => {
               )
             )
           })}
-          <Redirect to="/login" />
+          <Redirect to="/swagger" />
         </Switch>
       </Suspense>
     </CContainer>

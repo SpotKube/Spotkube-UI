@@ -62,7 +62,7 @@ const NavigationBar = (props) => {
                     </Link>
                   ))}
                   <Link
-                    to="/login"
+                    to="/swagger"
                     className={`font-medium ${
                       activeNav == "Log in"
                         ? "text-indigo-600"
@@ -123,7 +123,7 @@ const NavigationBar = (props) => {
                     ))}
                   </div>
                   <Link
-                    to="/login"
+                    to="/swagger"
                     className={`block w-full px-5 py-3 text-center font-medium ${
                       activeNav == "Log in"
                         ? "text-indigo-600"

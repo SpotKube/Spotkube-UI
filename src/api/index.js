@@ -7,14 +7,11 @@ import { toast } from "react-toastify";
  * Setup Axios
  */
 const BASE_URL_REMOTE = process.env.REACT_APP_BASE_URL_REMOTE;
-const FILE_URL_REMOTE = process.env.REACT_APP_FILE_URL_REMOTE;
 
 const DEFAULT_BASE_URL = BASE_URL_REMOTE;
-const DEFAULT_FILE_URL = FILE_URL_REMOTE;
 
 export const BACK_END_URL = {
   DEFAULT_BASE_URL,
-  DEFAULT_FILE_URL,
 };
 
 axios.defaults.baseURL = DEFAULT_BASE_URL;
@@ -32,7 +29,7 @@ export const registerAccessToken = (token, history, dispatch) => {
       toast.success("You will be redirect to Login page", { delay: 300 });
       dispatch(thunks.user.userLogout());
       setTimeout(() => {
-        history.replace("/login");
+        history.replace("/swagger");
         return;
       }, 2000);
       return false;
@@ -44,24 +41,18 @@ export const registerAccessToken = (token, history, dispatch) => {
     toast.success("You will be redirect to Login page", { delay: 300 });
     dispatch(thunks.user.userLogout());
     setTimeout(() => {
-      history.replace("/login");
+      history.replace("/swagger");
       return;
     }, 2000);
     return false;
   }
 };
 
-/**
- * Convert Axios Response into
- *      status: http status code
- *      message: message from backend api
- * @param res
- */
 function readStatus(res) {
   if (!res || !res.status) {
     return {
       status: 408,
-      message: "Alternative selected more than once",
+      message: "Network Error",
     };
   }
   return {
@@ -79,11 +70,14 @@ function readStatus(res) {
 async function ajaxResolver(axiosRes, options = null) {
   try {
     const res = await axiosRes;
-    if (options && options.fullBody) return [readStatus(res), res.data];
-    else return [readStatus(res), res.data.data];
+    let response = res.data;
+    if (!response.hasOwnProperty("status")) {
+      response.status = res.status;
+    }
+    return response;
   } catch (e) {
     const res = e.response;
-    return [readStatus(res), null];
+    return readStatus(res);
   }
 }
 
@@ -97,114 +91,93 @@ const formDataConfig = {
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
-  auth: {
-    async login(credentials) {
-      return ajaxResolver(
-        axios.post("/auth/login", {
-          username: credentials.username,
-          password: credentials.password,
-        })
-      );
+  fullFlow: {
+    async home() {
+      return ajaxResolver(axios.get(`/`));
     },
-    async register(data) {
-      return ajaxResolver(axios.post("/admin/signup", data));
+    async startUpAwsCloud() {
+      return ajaxResolver(axios.post(`/startup_aws_cloud`, {}));
     },
-    async viewProfile() {
-      return ajaxResolver(axios.get("/auth/view-profile"));
+    async updateAwsCloud() {
+      return ajaxResolver(axios.post(`/update_aws_cloud`, {}));
     },
-    async editProfile(data) {
-      return ajaxResolver(axios.put("/auth/edit-profile", data));
+    async startUpAwsCloud() {
+      return ajaxResolver(axios.post(`/startup_private_cloud`, {}));
     },
-    async changePassword(data) {
-      return ajaxResolver(axios.post("/auth/change-password", data));
-    },
-    // get: {
-    //     async designerAccounts(query) {
-    //         return ajaxResolver(axios.get("/api/user/get-all", { params: query }));
-    //     },
-    // },
-    // put: {
-    //     async changePassword(data) {
-    //         return ajaxResolver(axios.put(`/api/user/change-password`, data));
-    //     },
-    // },
-  },
-  user: {
-    async suspend(username) {
-      return ajaxResolver(axios.post(`/admin/suspend-user`, { username }));
-    },
-    async activate(username) {
-      return ajaxResolver(axios.post(`/admin/activate-user`, { username }));
-    },
-    async viewDesigners() {
-      return ajaxResolver(axios.get(`/admin/view-designers`));
-    },
-    async viewAdmins() {
-      return ajaxResolver(axios.get(`/admin/list-admins`));
-    },
-    async viewSurvey(surveyId) {
-      return ajaxResolver(axios.post(`/user/access-survey`, surveyId));
-    },
-    async submitData(data) {
-      return ajaxResolver(axios.post(`/user/submit-survey`, data));
-    },
-    async resetPassword(data) {
-      return ajaxResolver(axios.post(`/admin/reset-password`, data));
-    },
-    async adminEditProfile(data) {
-      return ajaxResolver(axios.put(`/admin/edit-user-profile`, data));
+    async updateAwsCloud() {
+      return ajaxResolver(axios.post(`/update_private_cloud`, {}));
     },
   },
-  designer: {
-    async uploadImage(imagedata) {
-      return ajaxResolver(axios.post(`designer/get-presigned-url`, imagedata));
-    },
-    async createSurvey(survey) {
-      return ajaxResolver(axios.post(`designer/create-survey`, survey));
-    },
-    async viewSurvey(surveyId) {
-      return ajaxResolver(axios.post(`esigner/get-survey`, surveyId));
-    },
-    async updateSurvey(survey) {
-      return ajaxResolver(axios.put(`/designer/update-survey`, survey));
+  optimizationEngine: {
+    async getNodes() {
+      return ajaxResolver(axios.post(`/opt_eng/get_nodes`, {}));
     },
   },
-  survey: {
-    async viewAll(query) {
-      return ajaxResolver(axios.post(`/designer/view-surveys`, query));
+  helmService: {
+    async home() {
+      return ajaxResolver(axios.get(`/helm_service/`));
     },
-    async suspendSurvey(surveyId, status) {
-      return ajaxResolver(
-        axios.put(`/designer/active-survey`, { surveyId, surveyStatus: status })
-      );
+    async deployPrivate() {
+      return ajaxResolver(axios.get(`/helm_service/deploy_private`));
     },
-    async archiveSurvey(surveyId, isArchived) {
-      return ajaxResolver(
-        axios.put(`/designer/archive-survey`, { surveyId, isArchived })
-      );
-    },
-    async deleteSurvey(surveyId) {
-      return ajaxResolver(
-        axios.delete(`/admin/delete-survey`, { data: { surveyId } })
-      );
+    async deployAws() {
+      return ajaxResolver(axios.get(`/helm_service/deploy_aws`));
     },
   },
-  surveyresponse: {
-    async submitData(query) {
-      return ajaxResolver(axios.post(`user/submit-survey`, query));
+  nodeAllocator: {
+    privateCloud: {
+      async home() {
+        return ajaxResolver(axios.get(`/node_allocator/private/`));
+      },
+      async destroy() {
+        return ajaxResolver(axios.get(`/node_allocator/private/destroy`));
+      },
+      async destroyAndProvision() {
+        return ajaxResolver(
+          axios.get(`/node_allocator/private/destroy_and_provision`)
+        );
+      },
+      async provision() {
+        return ajaxResolver(axios.get(`/node_allocator/private/provision`));
+      },
+      async apply() {
+        return ajaxResolver(axios.get(`/node_allocator/private/apply`));
+      },
+      async configure() {
+        return ajaxResolver(axios.get(`/node_allocator/private/configure`));
+      },
+      async writeTerraformOutput() {
+        return ajaxResolver(
+          axios.get(`/node_allocator/private/write_terraform_output`)
+        );
+      },
     },
-  },
-  backups: {
-    async listBackups() {
-      return ajaxResolver(axios.get(`/admin/list-backup`));
-    },
-    async create() {
-      return ajaxResolver(axios.get(`/admin/create-backup`));
-    },
-  },
-  response: {
-    async getResponse(surveyId) {
-      return ajaxResolver(axios.post(`/designer/view-response`, { surveyId }));
+    awsCloud: {
+      async home() {
+        return ajaxResolver(axios.get(`/node_allocator/aws/`));
+      },
+      async destroy() {
+        return ajaxResolver(axios.get(`/node_allocator/aws/destroy`));
+      },
+      async destroyAndProvision() {
+        return ajaxResolver(
+          axios.get(`/node_allocator/aws/destroy_and_provision`)
+        );
+      },
+      async provision() {
+        return ajaxResolver(axios.get(`/node_allocator/aws/provision`));
+      },
+      async apply() {
+        return ajaxResolver(axios.get(`/node_allocator/aws/apply`));
+      },
+      async configure() {
+        return ajaxResolver(axios.get(`/node_allocator/aws/configure`));
+      },
+      async writeTerraformOutput() {
+        return ajaxResolver(
+          axios.get(`/node_allocator/aws/write_terraform_output`)
+        );
+      },
     },
   },
 };

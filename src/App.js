@@ -19,12 +19,6 @@ const DefaultLayout = React.lazy(() => import("./layout/DefaultLayout"));
 const ErrorPage = React.lazy(() => import("./views/pages/errorPage"));
 
 function App() {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    // Check access token
-    dispatch(thunks.user.checkToken());
-  }, []);
-
   return (
     <BrowserRouter>
       <ToastContainer
@@ -41,15 +35,22 @@ function App() {
       <React.Suspense fallback={loading}>
         <Switch>
           <Route
-            path="/"
-            name="Admin Page"
+            path="/swagger"
+            name="Dashboard"
             render={(props) => <DefaultLayout {...props} />}
           />
-          <Route
+           <Route
             path="/404page"
             name="Error Page"
             render={(props) => <ErrorPage {...props} />}
           />
+          <Route
+            path="/"
+            name="Dashboard"
+            render={(props) => <Redirect to="/swagger" />}
+          />
+          
+         
           <Redirect
             to={{
               pathname: "/",

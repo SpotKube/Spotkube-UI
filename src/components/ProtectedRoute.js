@@ -31,7 +31,7 @@ const ProtectedRoute = ({ isLoggedIn, accountType, location, ...rest }) => {
     return (
         <Redirect
             to={{
-                pathname: "/login",
+                pathname: "/swagger",
                 state: {
                     from: location,
                 },

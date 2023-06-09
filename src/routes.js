@@ -7,7 +7,7 @@ const routes = [
     path: "/swagger",
     exact: true,
     name: "Swagger Panel",
-    component: Dashboard,
+    component: FullFlow,
     isLoggedIn: false,
   },
 
