@@ -9,6 +9,7 @@ import {
   cilWc,
   cilSettings,
   cilSend,
+  cilSpreadsheet
 } from "@coreui/icons";
 import { CNavGroup, CNavItem, CNavTitle } from "@coreui/react";
 
@@ -47,11 +48,16 @@ const _nav = [
   //     },
   //   ],
   // },
-  //  {
-  //   component: CNavTitle,
-  //   name: "Monitoring",
-
-  // },
+   {
+    component: CNavTitle,
+    name: "Logs",
+  },
+  {
+    component: CNavItem,
+    name: "Logs",
+    to: "/swagger/logs",
+    icon: <CIcon icon={cilSpreadsheet} customClassName="nav-icon" />,
+  },
 ];
 
 export default _nav;

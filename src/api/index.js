@@ -15,6 +15,7 @@ export const BACK_END_URL = {
 };
 
 axios.defaults.baseURL = DEFAULT_BASE_URL;
+axios.defaults.timeout = 100000;
 
 /**
  * Register Access token with axios
@@ -88,6 +89,8 @@ async function ajaxResolver(axiosRes, options = null) {
 const formDataConfig = {
   headers: { "content-type": "multipart/form-data" },
 };
+
+const timeOut = 100000;
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
@@ -177,6 +180,30 @@ export default {
         return ajaxResolver(
           axios.get(`/node_allocator/aws/write_terraform_output`)
         );
+      },
+    },
+  },
+  logs: {
+    privateCloud: {
+      async provisioning() {
+        return ajaxResolver(axios.get(`/log/private_provisioning_log`));
+      },
+      async configuring() {
+        return ajaxResolver(axios.get(`/log/private_configure_log`));
+      },
+      async deploying() {
+        return ajaxResolver(axios.get(`/log/private_deploy_log`));
+      },
+    },
+    awsCloud: {
+      async provisioning() {
+        return ajaxResolver(axios.get(`/log/aws_provisioning_log`));
+      },
+      async configuring() {
+        return ajaxResolver(axios.get(`/log/aws_configure_log`));
+      },
+      async deploying() {
+        return ajaxResolver(axios.get(`/log/aws_deploy_log`));
       },
     },
   },

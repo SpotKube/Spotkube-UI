@@ -53,6 +53,9 @@ const NodeAllocator = () => {
       case "private_apply":
         res = await api.nodeAllocator.privateCloud.apply();
         break;
+      case "private_deploy":
+        res = await api.helmService.deployPrivate();
+        break;
       case "aws_provision":
         res = await api.nodeAllocator.awsCloud.provision();
         break;
@@ -64,6 +67,9 @@ const NodeAllocator = () => {
         break;
       case "aws_apply":
         res = await api.nodeAllocator.awsCloud.apply();
+        break;
+      case "aws_deploy":
+        res = await api.helmService.deployAws();
         break;
       default:
         break;
@@ -168,7 +174,7 @@ const NodeAllocator = () => {
                   microservice applications.
                 </CCardText>
                 <CButton
-                  color="danger"
+                  color="success"
                   variant="outline"
                   onClick={() => handleButton("aws_configure")}
                   disabled={loading}
@@ -192,7 +198,7 @@ const NodeAllocator = () => {
                   microservice applications.
                 </CCardText>
                 <CButton
-                  color="danger"
+                  color="success"
                   variant="outline"
                   onClick={() => handleButton("private_configure")}
                   disabled={loading}
@@ -267,7 +273,7 @@ const NodeAllocator = () => {
                   Apply changes to the AWS Cloud with all the resources.
                 </CCardText>
                 <CButton
-                  color="danger"
+                  color="success"
                   variant="outline"
                   onClick={() => handleButton("aws_apply")}
                   disabled={loading}
@@ -290,7 +296,7 @@ const NodeAllocator = () => {
                   Apply changes to the private Cloud with all the resources
                 </CCardText>
                 <CButton
-                  color="danger"
+                  color="success"
                   variant="outline"
                   onClick={() => handleButton("private_apply")}
                   disabled={loading}
@@ -315,7 +321,7 @@ const NodeAllocator = () => {
                 </CCardTitle>
                 <CCardText>Deploy microservices in the AWS Cloud.</CCardText>
                 <CButton
-                  color="danger"
+                  color="success"
                   variant="outline"
                   onClick={() => handleButton("aws_deploy")}
                   disabled={loading}
@@ -339,7 +345,7 @@ const NodeAllocator = () => {
                   Deploy microservices in the private Cloud.
                 </CCardText>
                 <CButton
-                  color="danger"
+                  color="success"
                   variant="outline"
                   onClick={() => handleButton("private_deploy")}
                   disabled={loading}
