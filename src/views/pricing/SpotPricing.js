@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   CContainer,
@@ -41,6 +41,22 @@ const SpotPricing = () => {
 
   const [loading, setLoading] = useState(false);
   const [spotValues, setSpotValues] = useState(demoData);
+
+  // Fetch data
+  const fetchData = async () => {
+    setLoading(true);
+    const res = await api.dashboard.spotInstances();
+    console.log(res.data);
+    if (res.status === 200) {
+      setSpotValues(res.data);
+    } else {
+      toast.error("Something went wrong");
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const colorList = ["danger", "warning", "success", "info"];
   const spotPricingLength = spotValues.length;

@@ -207,4 +207,9 @@ export default {
       },
     },
   },
+  dashboard: {
+    async spotInstances() {
+      return ajaxResolver(axios.get(`/dashboard/spot-instances`));
+    }
+  }
 };

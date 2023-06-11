@@ -36,30 +36,37 @@ const NodeAllocator = () => {
   const handleButton = async (fnName) => {
     setLoading(true);
     let res;
+    let fileName = "";
     switch (fnName) {
       case "private_provision":
         res = await api.logs.privateCloud.provisioning();
+        fileName = "private_provision";
         break;
       case "private_configure":
         res = await api.logs.privateCloud.configuring();
+        fileName = "private_configure";
         break;
       case "private_deploy":
         res = await api.logs.privateCloud.deploying();
+        fileName = "private_deploy";
         break;
       case "aws_provision":
         res = await api.logs.awsCloud.provisioning();
+        fileName = "aws_provision";
         break;
       case "aws_configure":
         res = await api.logs.awsCloud.configuring();
+        fileName = "aws_configure";
         break;
       case "aws_deploy":
         res = await api.logs.awsCloud.deploying();
+        fileName = "aws_deploy";
         break;
       default:
         break;
     }
     if (res.status === 200) {
-      downloadLogFile(res.data);
+      downloadLogFile(res.data, fileName);
       setLoading(false);
     } else {
       toast.error(res.error_message || res.message || "Something went wrong");
@@ -68,23 +75,42 @@ const NodeAllocator = () => {
   };
 
   // Download the log file
-  const downloadLogFile = async (data) => {
-    // Create a Blob object from the log data
-    const blob = new Blob([data], { type: "text/plain" });
+  const downloadLogFile = async (data, fName) => {
+    try {
+      // Create a Blob object from the log data
+      const blob = new Blob([data], { type: "text/plain" });
 
-    // Create a temporary URL for the Blob object
-    const url = window.URL.createObjectURL(blob);
+      // Create a temporary URL for the Blob object
+      const url = window.URL.createObjectURL(blob);
 
-    // Create a link element and set its attributes for downloading
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = "aws_terraform.log";
+      const currentDate = new Date();
+      const formattedDate = currentDate.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+      });
 
-    // Programmatically click the link to initiate the download
-    link.click();
+      const formattedTime = currentDate.toLocaleTimeString("en-US", {
+        hour12: false,
+        hour: "2-digit",
+        minute: "2-digit",
+      });
 
-    // Clean up the temporary URL
-    window.URL.revokeObjectURL(url);
+      const fileName = `${fName}_${formattedDate}_${formattedTime}.log`;
+
+      // Create a link element and set its attributes for downloading
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = fileName;
+
+      // Programmatically click the link to initiate the download
+      link.click();
+
+      // Clean up the temporary URL
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
