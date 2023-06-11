@@ -20,13 +20,13 @@ const _nav = [
   },
   {
     component: CNavItem,
-    name: "Complete APIs",
+    name: "End-to-End Flows",
     to: "/swagger/full-flow",
     icon: <CIcon icon={cilSend} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
-    name: "Partial APIs",
+    name: "Task-based APIs",
     to: "/swagger/partial-apis",
     icon: <CIcon icon={cilSend} customClassName="nav-icon" />,
   },
