@@ -3,6 +3,7 @@ import Dashboard from "./views/dashboard/Dashboard";
 import FullFlow from "./views/swagger/FullFlow";
 import PartialAPIs from "./views/swagger/PartialAPIs";
 import Logs from "./views/logs/LogFiles";
+import SpotPricing from "./views/pricing/SpotPricing";
 
 const routes = [
   {
@@ -33,6 +34,13 @@ const routes = [
     exact: true,
     isLoggedIn: false,
     component: Logs,
+  },
+  {
+    path: "/swagger/spot-pricing",
+    name: "Spot Pricing",
+    exact: true,
+    isLoggedIn: false,
+    component: SpotPricing,
   },
 ];
 export default routes;

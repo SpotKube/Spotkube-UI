@@ -9,7 +9,8 @@ import {
   cilWc,
   cilSettings,
   cilSend,
-  cilSpreadsheet
+  cilSpreadsheet,
+  cilDollar
 } from "@coreui/icons";
 import { CNavGroup, CNavItem, CNavTitle } from "@coreui/react";
 
@@ -30,25 +31,7 @@ const _nav = [
     to: "/swagger/partial-apis",
     icon: <CIcon icon={cilSend} customClassName="nav-icon" />,
   },
-  // {
-  //   component: CNavGroup,
-  //   name: "APIs",
-  //   to: "/",
-  //   icon: <CIcon icon={cilSend} customClassName="nav-icon" />,
-  //   items: [
-  //     {
-  //       component: CNavItem,
-  //       name: "Complete APIs",
-  //       to: "/swagger/full-flow",
-  //     },
-  //     {
-  //       component: CNavItem,
-  //       name: "Partial APIs",
-  //       to: "/swagger/partial-apis",
-  //     },
-  //   ],
-  // },
-   {
+  {
     component: CNavTitle,
     name: "Logs",
   },
@@ -57,6 +40,16 @@ const _nav = [
     name: "Logs",
     to: "/swagger/logs",
     icon: <CIcon icon={cilSpreadsheet} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavTitle,
+    name: "Pricing",
+  },
+  {
+    component: CNavItem,
+    name: "Spot Pricing",
+    to: "/swagger/spot-pricing",
+    icon: <CIcon icon={cilDollar} customClassName="nav-icon" />,
   },
 ];
 
