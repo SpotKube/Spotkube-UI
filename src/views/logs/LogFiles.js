@@ -117,7 +117,7 @@ const NodeAllocator = () => {
     <>
       <CContainer className="ph-8 pb-16 h-full">
         {/* ----------------------------- Provision ------------------------------------- */}
-        <CRow className="pt-16">
+        <CRow className="pt-12">
           <CCol sm={6}>
             <CCard>
               <CCardBody>
