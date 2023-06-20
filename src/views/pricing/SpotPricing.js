@@ -28,9 +28,9 @@ const SpotPricing = () => {
   const fetchData = async () => {
     setLoading(true);
     const res = await api.dashboard.spotInstances();
-    console.log(res.data);
+    console.log(res.message);
     if (res.status === 200) {
-      setSpotValues(res.data || []);
+      setSpotValues(res.message || []);
     } else {
       toast.error("Something went wrong");
     }

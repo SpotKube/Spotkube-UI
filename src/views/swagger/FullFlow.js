@@ -35,9 +35,19 @@ const FullFlow = () => {
   useEffect(() => {
     const fetchInstanceValues = async () => {
       const res = await api.dashboard.spotInstances();
+      console.log(res);
       if (res.status === 200) {
         console.log(res);
-        // setInstanceValues(res.data);
+        const data = res.message;
+        let totalSpotInstances = 0;
+
+        data.forEach((item) => {
+          totalSpotInstances += item.count;
+        });
+        setInstanceValues({
+          spotInstances: totalSpotInstances,
+          privateInstances: 0,
+        })
       }
     };
     fetchInstanceValues();
@@ -149,9 +159,9 @@ const FullFlow = () => {
                   onClick={startupAWS}
                   disabled={loading}
                 >
-                  {loading && (
+                  {/* {loading && (
                     <CSpinner component="span" size="sm" aria-hidden="true" />
-                  )}{" "}
+                  )}{" "} */}
                   Start
                 </CButton>
               </CCardBody>
@@ -173,9 +183,9 @@ const FullFlow = () => {
                   onClick={startupAWS}
                   disabled={loading}
                 >
-                  {loading && (
+                  {/* {loading && (
                     <CSpinner component="span" size="sm" aria-hidden="true" />
-                  )}{" "}
+                  )}{" "} */}
                   Start
                 </CButton>
               </CCardBody>
@@ -199,9 +209,9 @@ const FullFlow = () => {
                   onClick={() => setAwsModalVisibility(true)}
                   disabled={loading}
                 >
-                  {loading && (
+                  {/* {loading && (
                     <CSpinner component="span" size="sm" aria-hidden="true" />
-                  )}{" "}
+                  )}{" "} */}
                   Destroy
                 </CButton>
               </CCardBody>
@@ -222,9 +232,9 @@ const FullFlow = () => {
                   onClick={() => setPrivateModalVisibility(true)}
                   disabled={loading}
                 >
-                  {loading && (
+                  {/* {loading && (
                     <CSpinner component="span" size="sm" aria-hidden="true" />
-                  )}{" "}
+                  )}{" "} */}
                   Destroy
                 </CButton>
               </CCardBody>

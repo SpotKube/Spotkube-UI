@@ -139,9 +139,9 @@ const NodeAllocator = () => {
                   onClick={() => handleButton("aws_provision")}
                   disabled={loading}
                 >
-                  {loading && (
+                  {/* {loading && (
                     <CSpinner component="span" size="sm" aria-hidden="true" />
-                  )}{" "}
+                  )}{" "} */}
                   Provision
                 </CButton>
               </CCardBody>
@@ -163,9 +163,9 @@ const NodeAllocator = () => {
                   onClick={() => handleButton("private_provision")}
                   disabled={loading}
                 >
-                  {loading && (
+                  {/* {loading && (
                     <CSpinner component="span" size="sm" aria-hidden="true" />
-                  )}{" "}
+                  )}{" "} */}
                   Provision
                 </CButton>
               </CCardBody>
@@ -190,9 +190,9 @@ const NodeAllocator = () => {
                   onClick={() => handleButton("aws_configure")}
                   disabled={loading}
                 >
-                  {loading && (
+                  {/* {loading && (
                     <CSpinner component="span" size="sm" aria-hidden="true" />
-                  )}{" "}
+                  )}{" "} */}
                   Configure
                 </CButton>
               </CCardBody>
@@ -214,9 +214,9 @@ const NodeAllocator = () => {
                   onClick={() => handleButton("private_configure")}
                   disabled={loading}
                 >
-                  {loading && (
+                  {/* {loading && (
                     <CSpinner component="span" size="sm" aria-hidden="true" />
-                  )}{" "}
+                  )}{" "} */}
                   Configure
                 </CButton>
               </CCardBody>
@@ -240,9 +240,9 @@ const NodeAllocator = () => {
                   onClick={() => setAwsModalVisibility(true)}
                   disabled={loading}
                 >
-                  {loading && (
+                  {/* {loading && (
                     <CSpinner component="span" size="sm" aria-hidden="true" />
-                  )}{" "}
+                  )}{" "} */}
                   Destroy
                 </CButton>
               </CCardBody>
@@ -263,9 +263,9 @@ const NodeAllocator = () => {
                   onClick={() => setPrivateModalVisibility(true)}
                   disabled={loading}
                 >
-                  {loading && (
+                  {/* {loading && (
                     <CSpinner component="span" size="sm" aria-hidden="true" />
-                  )}{" "}
+                  )}{" "} */}
                   Destroy
                 </CButton>
               </CCardBody>
@@ -289,9 +289,9 @@ const NodeAllocator = () => {
                   onClick={() => handleButton("aws_apply")}
                   disabled={loading}
                 >
-                  {loading && (
+                  {/* {loading && (
                     <CSpinner component="span" size="sm" aria-hidden="true" />
-                  )}{" "}
+                  )}{" "} */}
                   Apply
                 </CButton>
               </CCardBody>
@@ -312,9 +312,9 @@ const NodeAllocator = () => {
                   onClick={() => handleButton("private_apply")}
                   disabled={loading}
                 >
-                  {loading && (
+                  {/* {loading && (
                     <CSpinner component="span" size="sm" aria-hidden="true" />
-                  )}{" "}
+                  )}{" "} */}
                   Apply
                 </CButton>
               </CCardBody>
@@ -337,9 +337,9 @@ const NodeAllocator = () => {
                   onClick={() => handleButton("aws_deploy")}
                   disabled={loading}
                 >
-                  {loading && (
+                  {/* {loading && (
                     <CSpinner component="span" size="sm" aria-hidden="true" />
-                  )}{" "}
+                  )}{" "} */}
                   Deploy
                 </CButton>
               </CCardBody>
@@ -361,9 +361,9 @@ const NodeAllocator = () => {
                   onClick={() => handleButton("private_deploy")}
                   disabled={loading}
                 >
-                  {loading && (
+                  {/* {loading && (
                     <CSpinner component="span" size="sm" aria-hidden="true" />
-                  )}{" "}
+                  )}{" "} */}
                   Deploy
                 </CButton>
               </CCardBody>

@@ -134,9 +134,9 @@ const NodeAllocator = () => {
                     onClick={() => handleButton("aws_provision")}
                     disabled={loading}
                   >
-                    {loading && (
+                    {/* {loading && (
                       <CSpinner component="span" size="sm" aria-hidden="true" />
-                    )}{" "}
+                    )}{" "} */}
                     Download
                   </CButton>
                 </div>
@@ -157,9 +157,9 @@ const NodeAllocator = () => {
                     onClick={() => handleButton("private_provision")}
                     disabled={loading}
                   >
-                    {loading && (
+                    {/* {loading && (
                       <CSpinner component="span" size="sm" aria-hidden="true" />
-                    )}{" "}
+                    )}{" "} */}
                     Download
                   </CButton>
                 </div>
@@ -182,9 +182,9 @@ const NodeAllocator = () => {
                     onClick={() => handleButton("aws_configure")}
                     disabled={loading}
                   >
-                    {loading && (
+                    {/* {loading && (
                       <CSpinner component="span" size="sm" aria-hidden="true" />
-                    )}{" "}
+                    )}{" "} */}
                     Download
                   </CButton>
                 </div>
@@ -205,9 +205,9 @@ const NodeAllocator = () => {
                     onClick={() => handleButton("private_configure")}
                     disabled={loading}
                   >
-                    {loading && (
+                    {/* {loading && (
                       <CSpinner component="span" size="sm" aria-hidden="true" />
-                    )}{" "}
+                    )}{" "} */}
                     Download
                   </CButton>
                 </div>
@@ -232,9 +232,9 @@ const NodeAllocator = () => {
                     onClick={() => handleButton("aws_deploy")}
                     disabled={loading}
                   >
-                    {loading && (
+                    {/* {loading && (
                       <CSpinner component="span" size="sm" aria-hidden="true" />
-                    )}{" "}
+                    )}{" "} */}
                     Download
                   </CButton>
                 </div>
@@ -255,9 +255,9 @@ const NodeAllocator = () => {
                     onClick={() => handleButton("private_deploy")}
                     disabled={loading}
                   >
-                    {loading && (
+                    {/* {loading && (
                       <CSpinner component="span" size="sm" aria-hidden="true" />
-                    )}{" "}
+                    )}{" "} */}
                     Download
                   </CButton>
                 </div>
