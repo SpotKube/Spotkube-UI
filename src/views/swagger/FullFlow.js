@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import {
   CContainer,
@@ -26,11 +26,23 @@ import { toast } from "react-toastify";
 
 const FullFlow = () => {
   const [instanceValues, setInstanceValues] = useState({
-    spotInstances: 4,
-    privateInstances: 2,
+    spotInstances: 0,
+    privateInstances: 0,
   });
 
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchInstanceValues = async () => {
+      const res = await api.dashboard.spotInstances();
+      if (res.status === 200) {
+        console.log(res);
+        // setInstanceValues(res.data);
+      }
+    };
+    fetchInstanceValues();
+  }, []);
+
 
   // Modal related states
   const [awsModalVisibility, setAwsModalVisibility] = useState(false);

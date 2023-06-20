@@ -20,13 +20,9 @@ import { toast } from "react-toastify";
 import PriceWidget from "./PriceWidget";
 
 const SpotPricing = () => {
-  const [instanceValues, setInstanceValues] = useState({
-    spotInstances: 4,
-    privateInstances: 2,
-  });
 
   const [loading, setLoading] = useState(false);
-  const [spotValues, setSpotValues] = useState(demoData);
+  const [spotValues, setSpotValues] = useState([]);
 
   // Fetch data
   const fetchData = async () => {
@@ -34,7 +30,7 @@ const SpotPricing = () => {
     const res = await api.dashboard.spotInstances();
     console.log(res.data);
     if (res.status === 200) {
-      setSpotValues(res.data);
+      setSpotValues(res.data || []);
     } else {
       toast.error("Something went wrong");
     }
@@ -45,7 +41,7 @@ const SpotPricing = () => {
   }, []);
 
   const colorList = ["danger", "warning", "success", "info"];
-  const spotPricingLength = spotValues.length;
+  const spotPricingLength = spotValues?.length;
 
   // Generate a new list of colors based on the spotPricing length
   const generatedColors = [];
@@ -95,24 +91,7 @@ const demoData = [
       { timestamp: "2023-06-10T17:19:55+00:00", price: "0.020400" },
     ],
   },
-  {
-    instanceId: "i-1234567890abcdef1",
-    instanceType: "t3.large",
-    onDemandPricing: 0.0599,
-    count:1,
-    spotPricing: [
-      { timestamp: "2023-06-07T09:49:29+00:00", price: "0.021000" },
-      { timestamp: "2023-06-07T15:18:58+00:00", price: "0.020900" },
-      { timestamp: "2023-06-08T04:19:58+00:00", price: "0.022800" },
-      { timestamp: "2023-06-08T07:34:31+00:00", price: "0.020700" },
-      { timestamp: "2023-06-08T15:19:31+00:00", price: "0.020600" },
-      { timestamp: "2023-06-09T07:48:57+00:00", price: "0.021500" },
-      { timestamp: "2023-06-09T14:04:01+00:00", price: "0.020400" },
-      { timestamp: "2023-06-10T00:10:43+00:00", price: "0.023300" },
-      { timestamp: "2023-06-10T09:04:54+00:00", price: "0.020200" },
-      { timestamp: "2023-06-10T17:19:55+00:00", price: "0.020100" },
-    ],
-  },
+  
   {
     instanceId: "i-0987654321fedcba",
     instanceType: "t2.medium",
