@@ -25,31 +25,52 @@ Before running the SpotKube Web-UI, ensure that you have the following prerequis
 
 Follow these steps to install and run the SpotKube Web-UI:
 
-1. Clone the SpotKube Web-UI repository from GitHub:
+1. ### Clone the SpotKube Web-UI repository from GitHub:
    
    ```bash
    git clone https://github.com/SpotKube/Spotkube-UI.git
    ```
 
-2. Navigate to the `SpotKube-UI` directory:
+2. ### Navigate to the `SpotKube-UI` directory:
    
    ```bash
     cd SpotKube-UI
     ```
 
-3. Install the dependencies:
+3. ### Environment Configuration
+
+    To configure the environment for SpotKube, you need to set up the following variables in the `.env` file:
+
+    ```plaintext
+    REACT_APP_BASE_URL_REMOTE=http://34.198.51.121
+    # REACT_APP_BASE_URL_REMOTE=http://127.0.0.1:8000
+
+    REACT_APP_AWS_PROMETHEUS_URL=https://<aws-cloud-prometheus url>
+    REACT_APP_PRIVATE_PROMETHEUS_URL=https://<private-cloud-prometheus url>
+
+    ```
+
+    Make sure to replace the values accordingly. Here's what each variable represents:
+
+    - `REACT_APP_BASE_URL_REMOTE`: The base URL for the remote server. If you're running SpotKube locally, you can uncomment the second line and use the local address instead.
+
+    - `REACT_APP_AWS_PROMETHEUS_URL`: The URL for AWS Prometheus. Replace this with the appropriate URL for your AWS Prometheus instance.
+
+    - `REACT_APP_PRIVATE_PROMETHEUS_URL`: The URL for the private Prometheus. Replace this with the appropriate URL for your private Prometheus instance.
+
+3. ### Install the dependencies:
     
     ```bash
     npm install
     ```
 
-4. Run the application:
+4. ### Run the application:
     
     ```bash
     npm start
     ```
 
-5. Open the application in a browser at `http://localhost:3000`.
+5. ### Open the application in a browser at `http://localhost:3000`.
 
 ## Usage
 
